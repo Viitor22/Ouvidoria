@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>listarOcorrencias.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+listarOcorrencias.py</font>
+</center></td></tr></table>
+<pre><span class="s0">from </span><span class="s1">operacoesbd </span><span class="s0">import </span><span class="s2">*</span>
+<span class="s0">def </span><span class="s1">listarOcorrencias</span><span class="s2">(</span><span class="s1">cn</span><span class="s2">):</span>
+    <span class="s1">consultaListarOcorrencias </span><span class="s2">= </span><span class="s3">'select * from ocorrencias'</span>
+    <span class="s1">listaOcorrencias </span><span class="s2">= </span><span class="s1">listarBancoDados</span><span class="s2">(</span><span class="s1">cn</span><span class="s2">, </span><span class="s1">consultaListarOcorrencias</span><span class="s2">)</span>
+
+    <span class="s0">if </span><span class="s1">listaOcorrencias</span><span class="s2">:</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s3">'Listagem de ocorrências:'</span><span class="s2">)</span>
+        <span class="s0">for </span><span class="s1">ocorrencia </span><span class="s0">in </span><span class="s1">listaOcorrencias</span><span class="s2">:</span>
+            <span class="s1">print</span><span class="s2">(</span>
+                <span class="s3">f&quot;Título da ocorrência: </span><span class="s0">{</span><span class="s1">ocorrencia</span><span class="s2">[</span><span class="s4">1</span><span class="s2">]</span><span class="s0">} \n</span><span class="s3">Tipo de ocorrência: </span><span class="s0">{</span><span class="s1">ocorrencia</span><span class="s2">[</span><span class="s4">2</span><span class="s2">]</span><span class="s0">} \n</span><span class="s3">Usuário: </span><span class="s0">{</span><span class="s1">ocorrencia</span><span class="s2">[</span><span class="s4">3</span><span class="s2">]</span><span class="s0">} \n</span><span class="s3">Título da ocorrência: </span><span class="s0">\n </span><span class="s3">Ocorrência: </span><span class="s0">{</span><span class="s1">ocorrencia</span><span class="s2">[</span><span class="s4">4</span><span class="s2">]</span><span class="s0">}</span><span class="s3">&quot;</span><span class="s2">)</span>
+    <span class="s0">else</span><span class="s2">:</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s3">'Não há ocorrências cadastradas no momento.'</span><span class="s2">)</span>
+<span class="s0">def </span><span class="s1">listarOcorrenciasTypeReclamacao</span><span class="s2">(</span><span class="s1">cn</span><span class="s2">):</span>
+    <span class="s1">consultaListarOcorrencias </span><span class="s2">= </span><span class="s3">&quot;select * from ocorrencias where tipoDeOcorrencia = 'Reclamação'&quot;</span>
+    <span class="s1">listaOcorrencias </span><span class="s2">= </span><span class="s1">listarBancoDados</span><span class="s2">(</span><span class="s1">cn</span><span class="s2">, </span><span class="s1">consultaListarOcorrencias</span><span class="s2">)</span>
+
+    <span class="s0">if </span><span class="s1">listaOcorrencias</span><span class="s2">:</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s3">'Listagem de reclamações:'</span><span class="s2">)</span>
+        <span class="s0">for </span><span class="s1">ocorrencia </span><span class="s0">in </span><span class="s1">listaOcorrencias</span><span class="s2">:</span>
+            <span class="s1">print</span><span class="s2">(</span>
+                <span class="s3">f&quot;Título da ocorrência: </span><span class="s0">{</span><span class="s1">ocorrencia</span><span class="s2">[</span><span class="s4">1</span><span class="s2">]</span><span class="s0">} \n</span><span class="s3">Tipo de ocorrência: </span><span class="s0">{</span><span class="s1">ocorrencia</span><span class="s2">[</span><span class="s4">2</span><span class="s2">]</span><span class="s0">} \n</span><span class="s3">Usuário: </span><span class="s0">{</span><span class="s1">ocorrencia</span><span class="s2">[</span><span class="s4">3</span><span class="s2">]</span><span class="s0">} \n</span><span class="s3">Título da ocorrência: </span><span class="s0">\n </span><span class="s3">Ocorrência: </span><span class="s0">{</span><span class="s1">ocorrencia</span><span class="s2">[</span><span class="s4">4</span><span class="s2">]</span><span class="s0">}</span><span class="s3">&quot;</span><span class="s2">)</span>
+    <span class="s0">else</span><span class="s2">:</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s3">'Não há ocorrências cadastradas no momento.'</span><span class="s2">)</span>
+
+<span class="s0">def </span><span class="s1">listarOcorrenciasTypeSugestao</span><span class="s2">(</span><span class="s1">cn</span><span class="s2">):</span>
+    <span class="s1">consultaListarOcorrencias </span><span class="s2">= </span><span class="s3">&quot;select * from ocorrencias where tipoDeOcorrencia = 'Sugestão'&quot;</span>
+    <span class="s1">listaOcorrencias </span><span class="s2">= </span><span class="s1">listarBancoDados</span><span class="s2">(</span><span class="s1">cn</span><span class="s2">, </span><span class="s1">consultaListarOcorrencias</span><span class="s2">)</span>
+
+    <span class="s0">if </span><span class="s1">listaOcorrencias</span><span class="s2">:</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s3">'Listagem de sugestões:'</span><span class="s2">)</span>
+        <span class="s0">for </span><span class="s1">ocorrencia </span><span class="s0">in </span><span class="s1">listaOcorrencias</span><span class="s2">:</span>
+            <span class="s1">print</span><span class="s2">(</span>
+                <span class="s3">f&quot;Título da ocorrência: </span><span class="s0">{</span><span class="s1">ocorrencia</span><span class="s2">[</span><span class="s4">1</span><span class="s2">]</span><span class="s0">} \n</span><span class="s3">Tipo de ocorrência: </span><span class="s0">{</span><span class="s1">ocorrencia</span><span class="s2">[</span><span class="s4">2</span><span class="s2">]</span><span class="s0">} \n</span><span class="s3">Usuário: </span><span class="s0">{</span><span class="s1">ocorrencia</span><span class="s2">[</span><span class="s4">3</span><span class="s2">]</span><span class="s0">} \n</span><span class="s3">Título da ocorrência: </span><span class="s0">\n </span><span class="s3">Ocorrência: </span><span class="s0">{</span><span class="s1">ocorrencia</span><span class="s2">[</span><span class="s4">4</span><span class="s2">]</span><span class="s0">}</span><span class="s3">&quot;</span><span class="s2">)</span>
+    <span class="s0">else</span><span class="s2">:</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s3">'Não há ocorrências cadastradas no momento.'</span><span class="s2">)</span>
+
+<span class="s0">def </span><span class="s1">listarOcorrenciasTypeElogio</span><span class="s2">(</span><span class="s1">cn</span><span class="s2">):</span>
+    <span class="s1">consultaListarOcorrencias </span><span class="s2">= </span><span class="s3">&quot;select * from ocorrencias where tipoDeOcorrencia = 'Elogio'&quot;</span>
+    <span class="s1">listaOcorrencias </span><span class="s2">= </span><span class="s1">listarBancoDados</span><span class="s2">(</span><span class="s1">cn</span><span class="s2">, </span><span class="s1">consultaListarOcorrencias</span><span class="s2">)</span>
+
+    <span class="s0">if </span><span class="s1">listaOcorrencias</span><span class="s2">:</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s3">'Listagem de elogios:'</span><span class="s2">)</span>
+        <span class="s0">for </span><span class="s1">ocorrencia </span><span class="s0">in </span><span class="s1">listaOcorrencias</span><span class="s2">:</span>
+            <span class="s1">print</span><span class="s2">(</span>
+                <span class="s3">f&quot;Título da ocorrência: </span><span class="s0">{</span><span class="s1">ocorrencia</span><span class="s2">[</span><span class="s4">1</span><span class="s2">]</span><span class="s0">} \n</span><span class="s3">Tipo de ocorrência: </span><span class="s0">{</span><span class="s1">ocorrencia</span><span class="s2">[</span><span class="s4">2</span><span class="s2">]</span><span class="s0">} \n</span><span class="s3">Usuário: </span><span class="s0">{</span><span class="s1">ocorrencia</span><span class="s2">[</span><span class="s4">3</span><span class="s2">]</span><span class="s0">} \n</span><span class="s3">Título da ocorrência: </span><span class="s0">\n </span><span class="s3">Ocorrência: </span><span class="s0">{</span><span class="s1">ocorrencia</span><span class="s2">[</span><span class="s4">4</span><span class="s2">]</span><span class="s0">}</span><span class="s3">&quot;</span><span class="s2">)</span>
+    <span class="s0">else</span><span class="s2">:</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s3">'Não há ocorrências cadastradas no momento.'</span><span class="s2">)</span>
+
+
+</pre>
+</body>
+</html>

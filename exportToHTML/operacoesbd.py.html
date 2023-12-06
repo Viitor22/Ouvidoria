@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>operacoesbd.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+operacoesbd.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">mysql</span><span class="s2">.</span><span class="s1">connector</span>
+
+<span class="s0">def </span><span class="s1">criarConexao</span><span class="s2">(</span><span class="s1">endereco</span><span class="s2">,</span><span class="s1">usuario</span><span class="s2">, </span><span class="s1">senha</span><span class="s2">, </span><span class="s1">bancodedados</span><span class="s2">):</span>
+      <span class="s0">return </span><span class="s1">mysql</span><span class="s2">.</span><span class="s1">connector</span><span class="s2">.</span><span class="s1">connect</span><span class="s2">(</span>
+  <span class="s1">host</span><span class="s2">=</span><span class="s1">endereco</span><span class="s2">,</span><span class="s1">user</span><span class="s2">=</span><span class="s1">usuario</span><span class="s2">, </span><span class="s1">password</span><span class="s2">=</span><span class="s1">senha</span><span class="s2">,</span><span class="s1">database</span><span class="s2">=</span><span class="s1">bancodedados</span><span class="s2">)</span>
+
+<span class="s0">def </span><span class="s1">encerrarBancoDados</span><span class="s2">(</span><span class="s1">connection</span><span class="s2">):</span>
+      <span class="s1">connection</span><span class="s2">.</span><span class="s1">close</span><span class="s2">()</span>
+
+<span class="s0">def </span><span class="s1">insertNoBancoDados</span><span class="s2">(</span><span class="s1">connection</span><span class="s2">,</span><span class="s1">sql</span><span class="s2">,</span><span class="s1">dados</span><span class="s2">):</span>
+      <span class="s1">cursor </span><span class="s2">= </span><span class="s1">connection</span><span class="s2">.</span><span class="s1">cursor</span><span class="s2">()</span>
+      <span class="s1">cursor</span><span class="s2">.</span><span class="s1">execute</span><span class="s2">(</span><span class="s1">sql</span><span class="s2">, </span><span class="s1">dados</span><span class="s2">)</span>
+      <span class="s1">connection</span><span class="s2">.</span><span class="s1">commit</span><span class="s2">()</span>
+      <span class="s1">id </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">lastrowid</span>
+      <span class="s1">cursor</span><span class="s2">.</span><span class="s1">close</span><span class="s2">()</span>
+      <span class="s0">return </span><span class="s1">id</span>
+
+<span class="s0">def </span><span class="s1">listarBancoDados</span><span class="s2">(</span><span class="s1">connection</span><span class="s2">,</span><span class="s1">sql</span><span class="s2">):</span>
+      <span class="s1">cursor </span><span class="s2">= </span><span class="s1">connection</span><span class="s2">.</span><span class="s1">cursor</span><span class="s2">()</span>
+      <span class="s1">cursor</span><span class="s2">.</span><span class="s1">execute</span><span class="s2">(</span><span class="s1">sql</span><span class="s2">)</span>
+      <span class="s1">results </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">fetchall</span><span class="s2">()</span>
+      <span class="s1">cursor</span><span class="s2">.</span><span class="s1">close</span><span class="s2">()</span>
+      <span class="s0">return </span><span class="s1">results</span>
+
+<span class="s0">def </span><span class="s1">atualizarBancoDados</span><span class="s2">(</span><span class="s1">connection</span><span class="s2">,</span><span class="s1">sql</span><span class="s2">, </span><span class="s1">dados</span><span class="s2">):</span>
+      <span class="s1">cursor </span><span class="s2">= </span><span class="s1">connection</span><span class="s2">.</span><span class="s1">cursor</span><span class="s2">()</span>
+      <span class="s1">cursor</span><span class="s2">.</span><span class="s1">execute</span><span class="s2">(</span><span class="s1">sql</span><span class="s2">, </span><span class="s1">dados</span><span class="s2">)</span>
+      <span class="s1">connection</span><span class="s2">.</span><span class="s1">commit</span><span class="s2">()</span>
+      <span class="s1">linhasAfetadas </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">rowcount</span>
+      <span class="s1">cursor</span><span class="s2">.</span><span class="s1">close</span><span class="s2">()</span>
+      <span class="s0">return </span><span class="s1">linhasAfetadas</span>
+
+<span class="s0">def </span><span class="s1">excluirBancoDados</span><span class="s2">(</span><span class="s1">connection</span><span class="s2">,</span><span class="s1">sql</span><span class="s2">,</span><span class="s1">dados</span><span class="s2">):</span>
+      <span class="s1">cursor </span><span class="s2">= </span><span class="s1">connection</span><span class="s2">.</span><span class="s1">cursor</span><span class="s2">()</span>
+      <span class="s1">cursor</span><span class="s2">.</span><span class="s1">execute</span><span class="s2">(</span><span class="s1">sql</span><span class="s2">, </span><span class="s1">dados</span><span class="s2">)</span>
+      <span class="s1">connection</span><span class="s2">.</span><span class="s1">commit</span><span class="s2">()</span>
+      <span class="s1">linhasAfetadas </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">rowcount</span>
+      <span class="s1">cursor</span><span class="s2">.</span><span class="s1">close</span><span class="s2">()</span>
+      <span class="s0">return </span><span class="s1">linhasAfetadas</span>
+</pre>
+</body>
+</html>
